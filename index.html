@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beans - Cafea de Specialitate</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        @font-face {
+            font-family: 'Simple Serenity';
+            src: url('SimpleSerenity.ttf') format('truetype'); /* Replace with your font file path */
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            font-family: 'Simple Serenity', sans-serif;
+            margin: 0;
+            background-color: #f8f0e3; /* Light beige background */
+            color: #733D24;
+            line-height: 1.6;
+            overflow-x: hidden; /* Prevent horizontal scrollbar */
+        }
+
+        .menu-bar-container {
+            background-color: rgba(214, 174, 146, 0.3); /* Light brown transparent bar */
+            padding: 15px 20px;
+            position: fixed; /* Stick to the top */
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 10; /* Ensure it's above other content */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: flex-start; /* Align buttons to the left */
+        }
+
+        .menu-home {
+            /* Removed absolute positioning */
+        }
+
+        .menu-home button {
+            background: none;
+            border: none;
+            color: #733D24;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin-right: 25px;
+            transition: color 0.3s ease-in-out;
+            font-family: 'Simple Serenity', sans-serif;
+        }
+
+        .menu-home button:hover {
+            color: #471E0D;
+        }
+
+        .home-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh; /* Ensure full viewport height */
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+            margin-top: 70px; /* Adjust margin to account for the fixed menu bar */
+            background-image: url('coffee_bg_light.jpg'); /* Subtle background image */
+            background-size: cover;
+            background-position: center;
+        }
+
+        .logo-home {
+            /* Removed */
+        }
+
+        .brand-name {
+            font-family: 'Simple Serenity', sans-serif;
+            font-weight: bold;
+            font-size: 4em; /* Larger brand name */
+            color: #471E0D;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* Subtle text shadow */
+        }
+
+        .slogan {
+            font-style: italic;
+            color: #733D24;
+            margin-bottom: 50px;
+            font-size: 1.6em; /* Larger slogan */
+        }
+
+        .buy-button {
+            background-color: #471E0D;
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1.2em;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out, transform 0.2s ease-in-out;
+            letter-spacing: 0.5px;
+        }
+
+        .buy-button:hover {
+            background-color: #B77152;
+            box-shadow: 7px 7px 12px rgba(0, 0, 0, 0.25);
+            transform: scale(1.05);
+        }
+
+        figure {
+            margin: 40px auto;
+            text-align: center;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        figure:hover {
+            transform: scale(1.02);
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        figure img {
+            max-width: 80%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        figure figcaption {
+            margin-top: 10px;
+            font-style: italic;
+            color: #777;
+        }
+
+        .featured-product {
+            background-color: #fff;
+            padding: 30px;
+            margin: 30px auto;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+            max-width: 800px;
+            text-align: center;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        .featured-product:hover {
+            transform: scale(1.02);
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .featured-product h2 {
+            color: #471E0D;
+            margin-bottom: 20px;
+            font-size: 2.2em;
+        }
+
+        .featured-product img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .featured-product p {
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        .parallax-bg {
+            background-image: url('coffee_bg.jpg'); /* Replace with your image */
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: auto; /* Adjust height as needed */
+            padding: 50px 20px; /* Add padding for better spacing */
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Center content horizontally */
+            color: white;
+            text-align: center;
+            margin: 40px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: rgba(0, 0, 0, 0.6); /* Darker overlay for text contrast */
+            background-blend-mode: multiply; /* To blend overlay with background image */
+            position: relative; /* For absolute positioning of the price box */
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        .parallax-bg:hover {
+            transform: scale(1.01);
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .parallax-bg::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('texture.png'); /* Replace with your texture image */
+            opacity: 0.2; /* Adjust opacity for desired effect */
+            background-repeat: repeat;
+        }
+
+        .parallax-content {
+            position: relative; /* To be above the pseudo-element */
+            z-index: 1; /* Ensure text is above texture */
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center content horizontally */
+            padding: 30px;
+            border-radius: 10px;
+            background-color: rgba(0, 0, 0, 0.7); /* Slightly darker overlay for content */
+        }
+
+        .parallax-content h2 {
+            font-size: 2.8em;
+            font-weight: bold;
+            color: #f8f0e3; /* Beige color */
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .parallax-content p {
+            font-size: 1.3em;
+            line-height: 1.8;
+            margin-bottom: 25px; /* Increased margin */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .parallax-content .buy-button {
+            /* Inherits styles from the main buy-button */
+            margin-top: 20px; /* Add some space above the button */
+        }
+
+        .price-box {
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+            color: #471E0D;
+            padding: 15px 20px;
+            border-radius: 10px;
+            font-size: 1.3em;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            margin-top: 15px; /* Space between "Vezi detalii" and price */
+        }
+
+        .reviews-section, .blog-section {
+            background-color: #fff;
+            padding: 40px;
+            margin: 40px auto;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            max-width: 900px;
+            text-align: left;
+            position: relative; /* For carousel buttons positioning */
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        .reviews-section:hover, .blog-section:hover {
+            transform: scale(1.01);
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .reviews-section h2, .blog-section h2 {
+            color: #471E0D;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+
+        .review-box {
+            background-color: #fefae0;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+        }
+
+        .review-box p {
+            color: #555;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+        .review-box cite {
+            color: #733D24;
+            font-weight: bold;
+            font-style: normal;
+            display: block;
+            text-align: right;
+        }
+
+        .reviewer-info {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            margin-top: 10px;
+            font-style: normal;
+        }
+
+        .reviewer-info .emoji {
+            margin-left: 8px;
+            font-size: 1.2em;
+        }
+
+        .blog-section p {
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        .carousel-buttons {
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            right: 10px;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+
+        .carousel-button {
+            background: none;
+            border: none;
+            color: #B77152;
+            font-size: 1.5em;
+            cursor: pointer;
+            padding: 5px 10px;
+            opacity: 0.7;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .carousel-button:hover {
+            opacity: 1;
+        }
+
+        /* Eye-pleasing elements */
+        .coffee-beans-scatter {
+            position: absolute;
+            top: 15%;
+            left: 5%;
+            width: 80px;
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        .coffee-cup-corner {
+            position: fixed;
+            bottom: 10%;
+            right: 5%;
+            width: 100px;
+            opacity: 0.4;
+            z-index: 0;
+        }
+    </style>
+</head>
+<body>
+    <img src="coffee_beans_scatter.png" alt="" class="coffee-beans-scatter">
+    <img src="coffee_cup.png" alt="" class="coffee-cup-corner">
+
+    <div class="menu-bar-container">
+        <div class="menu-home">
+            <button>Despre noi</button>
+            <button>Serviciile noastre</button>
+            <button>Locațiile disponibile</button>
+            <button>Echipa</button>
+        </div>
+    </div>
+    <div class="home-container">
+        <img src="BINS.png" alt="Logo Beans" style="max-width: 300px; height: auto; margin-bottom: 10px;">
+        <p class="slogan">”BEans: Fii mereu cu o cafea la îndemână- Oriunde, oricând”</p>
+        <button class="buy-button" onclick="window.location.href='buy.html'">Cumpără</button>
+    </div>
+
+    <figure>
+        <img src="pup1.png" alt="Boabe de cafea aromate">
+        <figcaption>Selectăm cu grijă cele mai bune boabe pentru tine.</figcaption>
+    </figure>
+
+    <div class="featured-product">
+        <h2>Cafeaua noastră specială a săptămânii</h2>
+        <img src="pup2.jpg" alt="Cafea specială">
+        <p>Descoperă "Etiopia Yirgacheffe Kochere", o cafea cu arome florale delicate, note citrice și o aciditate vibrantă. Perfectă pentru o experiență de degustare unică.</p>
+        <button class="buy-button" onclick="window.location.href='buy.html'">Încearcă acum</button>
+    </div>
+
+    <div class="parallax-bg">
+        <div class="parallax-content">
+            <h2>Abonamentul <span style="color: #f8f0e3; font-weight: bold;">Crazy Beans</span></h2>
+            <p>Primește acasă selecții exclusive de cafea de specialitate, proaspăt prăjită, la intervale regulate alese de tine. Bucură-te de arome unice din întreaga lume, cu flexibilitate și comoditate. Alege cantitatea și frecvența care ți se potrivesc perfect și nu rămâi niciodată fără cafeaua preferată!</p>
+            <button class="buy-button">Vezi detalii</button>
+            <div class="price-box">Începând de la 150 RON</div>
+        </div>
+    </div>
+
+    <div class="reviews-section">
+        <h2>Ce spun clienții noștri</h2>
+        <div class="review-box">
+            <p>”Cafeaua de la Beans îmi face diminețile mai frumoase! Livrarea este rapidă și cafeaua are un gust excepțional.”</p>
+            <cite>- Ana M.</cite>
+            <div class="reviewer-info">
+                <span class>👩‍🍳☕</span>
+            </div>
+        </div>
+        <div class="review-box">
+            <p>”Perfect pentru pauza de la birou. Comand ușor și mă bucur de o cafea de calitate fără să ies.”</p>
+            <cite>- Bogdan S.</cite>
+            <div class="reviewer-info">
+                <span class="emoji">👨‍💻☕</span>
+            </div>
+        </div>
+        <div class="review-box">
+            <p>”Încerc mereu sortimente noi și sunt impresionat de varietatea și aroma cafelei. Recomand cu încredere!”</p>
+            <cite>- Elena P.</cite>
+            <div class="reviewer-info">
+                <span class="emoji">👩‍🌾☕</span>
+            </div>
+        </div>
+        <div class="carousel-buttons">
+            <button class="carousel-button">&#8249;</button>
+            <button class="carousel-button">&#8250;</button>
+        </div>
+    </div>
+
+    <div class="blog-section">
+        <h2>Blog - Totul despre cafeaua ta preferată</h2>
+        <p>Cafeaua este una dintre cele mai populare băuturi din lume, iar istoria sa este fascinantă. Se crede că originile cafelei se află în regiunile muntoase ale Etiopiei, unde boabele de cafea erau consumate pentru efectele lor energizante încă din secolul al IX-lea.</p>
+        <p>Există două tipuri principale de boabe de cafea cultivate comercial: Arabica și Robusta. Boabele Arabica sunt cunoscute pentru aroma lor complexă și aciditatea mai ridicată, reprezentând majoritatea producției mondiale. Boabele Robusta au un conținut mai ridicat de cofeină și un gust mai puternic și amar.</p>
+        <p>Procesul de prăjire a boabelor de cafea este crucial pentru dezvoltarea aromei. Temperatura și durata prăjirii influențează gustul final, de la note florale și fructate la arome de ciocolată și nuci.</p>
+        <p>La Beans, ne dedicăm să vă oferim o experiență a cafelei de specialitate, de la selecția boabelor până la livrarea la ușa dumneavoastră în Iași. Explorăm continuu noi origini și metode de preparare pentru a vă surprinde cu arome unice.</p>
+        <div class="carousel-buttons">
+            <button class="carousel-button">&#8249;</button>
+            <button class="carousel-button">&#8250;</button>
+        </div>
+    </div>
+</body>
+</html>

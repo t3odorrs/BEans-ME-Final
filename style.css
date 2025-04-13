@@ -1,0 +1,406 @@
+/* style.css */
+
+body {
+    font-family: 'Simple Serenity', sans-serif;
+    margin: 0;
+    background-color: #f8f0e3; /* Light beige background */
+    color: #733D24;
+    transition: background-color 0.3s ease-in-out;
+    line-height: 1.6; /* Improved readability */
+}
+
+body.transitioning {
+    opacity: 0.8;
+}
+
+header {
+    background-color: #B77152;
+    color: white;
+    padding: 1.5em 20px;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle header shadow */
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2em; /* Slightly larger brand name */
+    letter-spacing: 0.5px;
+}
+
+.brand-description {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Increased gap */
+}
+
+.brand-description h1 {
+    margin: 0;
+}
+
+.menu-buy {
+    display: flex;
+    gap: 20px; /* Increased gap */
+}
+
+.menu-buy button, .cart-btn, .delivery-btn {
+    background: none;
+    border: 2px solid #733D24;
+    color: #733D24;
+    font-size: 1.1em; /* Slightly larger font */
+    cursor: pointer;
+    padding: 12px 25px; /* Increased padding */
+    border-radius: 30px; /* More rounded buttons */
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.menu-buy button:hover, .cart-btn:hover, .delivery-btn:hover {
+    background-color: #733D24;
+    color: white;
+    border-color: #733D24;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle hover shadow */
+}
+
+.cart-delivery {
+    display: flex;
+    gap: 15px;
+}
+
+.container {
+    max-width: 1100px; /* Slightly wider container */
+    margin: 40px auto; /* Increased top margin */
+    background-color: #fff;
+    padding: 50px; /* Increased padding */
+    border-radius: 15px; /* More rounded corners */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* More pronounced shadow */
+}
+
+h2 {
+    color: #471E0D;
+    text-align: center;
+    margin-bottom: 40px; /* Increased margin */
+    font-size: 2.5em; /* Larger heading */
+    letter-spacing: 1px;
+}
+
+.page-details {
+    text-align: center;
+    color: #555;
+    margin-bottom: 40px; /* Increased margin */
+    padding: 0 50px; /* Increased padding */
+    font-size: 1.2em; /* Larger font */
+    line-height: 1.8; /* Improved readability */
+}
+
+.page-details p {
+    margin-bottom: 20px; /* Increased margin */
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Slightly wider cards */
+    gap: 35px; /* Increased gap */
+    padding: 35px; /* Increased padding */
+    border: 1px solid #ddd;
+    border-radius: 12px; /* More rounded corners */
+    margin-bottom: 40px; /* Increased margin */
+    background-color: #fefae0; /* Light yellow for the grid */
+}
+
+.product-card {
+    background-color: #fff;
+    border-radius: 12px; /* More rounded corners */
+    padding: 25px; /* Increased padding */
+    box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.08); /* Softer shadow */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s ease-in-out; /* Subtle hover effect */
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 5px 7px 15px rgba(0, 0, 0, 0.1);
+}
+
+.product-title {
+    font-weight: bold;
+    margin-bottom: 10px; /* Increased margin */
+    color: #471E0D;
+    font-size: 1.3em; /* Larger font */
+    display: flex; /* To align text and emoji */
+    align-items: center;
+    justify-content: center; /* Center title and emoji */
+    gap: 8px; /* Space between title and emoji */
+}
+
+.product-details {
+    font-size: 1.1em; /* Larger font */
+    color: #555;
+    margin-bottom: 45px; /* Increased margin */
+    line-height: 1.7; /* Improved readability */
+}
+
+.add-to-cart-btn {
+    background-color: #471E0D;
+    color: white;
+    border: none;
+    padding: 12px 25px; /* Increased padding */
+    border-radius: 25px; /* More rounded */
+    cursor: pointer;
+    font-size: 1.1em; /* Larger font */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* More noticeable shadow */
+    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    position: absolute;
+    bottom: 20px; /* Increased bottom margin */
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.add-to-cart-btn:hover {
+    background-color: #733D24;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.shape {
+    position: absolute;
+    background-color: rgba(214, 174, 146, 0.4); /* Slightly more opaque */
+    border-radius: 50%;
+    animation: pulse 2.5s infinite alternate; /* Slightly slower pulse */
+}
+
+.shape-1 {
+    width: 60px; /* Increased size */
+    height: 60px; /* Increased size */
+    top: 10px; /* Adjusted position */
+    left: 10px; /* Adjusted position */
+}
+
+.shape-2 {
+    width: 80px; /* Increased size */
+    height: 80px; /* Increased size */
+    bottom: 10px; /* Adjusted position */
+    right: 10px; /* Adjusted position */
+}
+
+.shape-3 {
+    width: 50px; /* Increased size */
+    height: 50px; /* Increased size */
+    top: 45%; /* Adjusted position */
+    left: 45%; /* Adjusted position */
+    transform: translate(-50%, -50%);
+    border-radius: 15%; /* More oval */
+}
+
+.shape-croissant,
+.shape-muffin,
+.shape-donut,
+.shape-cookie,
+.shape-tea {
+    position: absolute;
+    font-size: 3em; /* Larger icons */
+    opacity: 0.25; /* Slightly more visible */
+}
+
+.shape-croissant {
+    top: 10px;
+    right: 10px;
+}
+
+.shape-muffin {
+    bottom: 10px;
+    left: 10px;
+}
+
+.shape-donut {
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+}
+
+.shape-cookie {
+    bottom: 50%;
+    right: 10px;
+    transform: translateY(50%);
+    border-radius: 50%;
+}
+
+.shape-tea {
+    bottom: 10px;
+    right: 10px;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 0.4; }
+    100% { transform: scale(1.1); opacity: 0.7; }
+}
+
+footer {
+    text-align: center;
+    padding: 2.5em 0; /* Increased padding */
+    font-size: 1em; /* Slightly larger font */
+    color: #777;
+    margin-top: 50px; /* Increased margin */
+    background-color: #f8f0e3; /* Match body background */
+    border-top: 1px solid #ddd; /* Subtle top border */
+}
+
+.cart-menu {
+    position: fixed;
+    top: 80px; /* Adjusted top position */
+    right: 40px; /* Adjusted right position */
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 10px; /* More rounded */
+    padding: 25px; /* Increased padding */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* More noticeable shadow */
+    z-index: 10;
+    display: none;
+    min-width: 350px; /* Increased minimum width */
+}
+
+.cart-menu h3 {
+    color: #471E0D;
+    margin-top: 0;
+    margin-bottom: 20px; /* Increased margin */
+    font-size: 1.5em; /* Larger font */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.close-cart-btn {
+    background: none;
+    border: none;
+    color: #888;
+    font-size: 1.3em; /* Slightly larger */
+    cursor: pointer;
+}
+
+.close-cart-btn:hover {
+    color: #333;
+}
+
+.cart-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px; /* Increased margin */
+    padding-bottom: 8px; /* Increased padding */
+    border-bottom: 1px solid #eee;
+}
+
+.cart-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.cart-item span {
+    font-size: 1.1em; /* Slightly larger font */
+    color: #555;
+}
+
+.remove-item-btn {
+    background: none;
+    border: none;
+    color: #ff4d4d;
+    font-size: 1.2em; /* Slightly larger */
+    cursor: pointer;
+    margin-left: 10px;
+    transition: color 0.3s ease-in-out;
+}
+
+.remove-item-btn:hover {
+    color: #cc0000;
+}
+
+.cart-total {
+    margin-top: 20px; /* Increased margin */
+    padding-top: 15px; /* Increased padding */
+    border-top: 1px solid #ddd;
+    text-align: right;
+    font-weight: bold;
+    color: #471E0D;
+    font-size: 1.2em; /* Slightly larger font */
+}
+
+.cart-total::before {
+    content: "Total: ";
+}
+
+.delivery-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 10px; /* More rounded */
+    padding: 30px; /* Increased padding */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* More noticeable shadow */
+    z-index: 11;
+    display: none;
+    min-width: 400px; /* Increased minimum width */
+}
+
+.delivery-modal h3 {
+    color: #471E0D;
+    margin-top: 0;
+    margin-bottom: 25px; /* Increased margin */
+    font-size: 1.5em; /* Larger font */
+}
+
+.delivery-modal label {
+    display: block;
+    margin-bottom: 10px; /* Increased margin */
+    color: #555;
+    font-size: 1.2em; /* Larger font */
+}
+
+.delivery-modal input[type="text"] {
+    width: 100%;
+    padding: 12px; /* Increased padding */
+    margin-bottom: 20px; /* Increased margin */
+    border: 1px solid #ccc;
+    border-radius: 6px; /* More rounded */
+    box-sizing: border-box;
+    font-size: 1.1em; /* Larger font */
+}
+
+.delivery-modal button {
+    background-color: #471E0D;
+    color: white;
+    border: none;
+    padding: 14px 28px; /* Increased padding */
+    border-radius: 25px; /* More rounded */
+    cursor: pointer;
+    font-size: 1.1em; /* Larger font */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* More noticeable shadow */
+    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    margin-right: 15px;
+}
+
+.delivery-modal button:hover {
+    background-color: #733D24;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.close-modal-btn {
+    background-color: #777;
+}
+
+.close-modal-btn:hover {
+    background-color: #555;
+}

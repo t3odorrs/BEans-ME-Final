@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>☕ BEans - Delivery Cafea Iași</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: 'Simple Serenity', sans-serif;
+            margin: 0;
+            background-color: #f4f4f4;
+            color: #733D24;
+            transition: background-color 1.2ms ease-in-out;
+        }
+
+        body.transitioning {
+            opacity: 0.8;
+        }
+
+        header {
+            background-color: #B77152;
+            color: white;
+            padding: 1.5em 20px;
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.8em;
+        }
+
+        .brand-description {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand-description h1 {
+            margin: 0;
+            font-family: 'Brush Script MT', cursive; /* Example stylish font */
+            font-size: 2.5em; /* Sized up */
+            letter-spacing: 1px;
+            transition: transform 0.3s ease;
+        }
+
+        .brand-description h1:hover {
+            transform: scale(1.05);
+        }
+
+        .brand-description span {
+            font-size: 1.1em;
+        }
+
+        .menu-buy {
+            display: flex;
+            gap: 15px; /* Increased gap for more spacing */
+        }
+
+        .menu-buy button, .cart-btn {
+            background: none;
+            border: 2px solid #733D24;
+            color: #733D24;
+            font-size: 1em;
+            cursor: pointer;
+            padding: 10px 20px; /* Increased padding */
+            border-radius: 25px;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+            position: relative; /* For the cart count */
+        }
+
+        .cart-btn::after {
+            content: attr(data-cart-items);
+            position: absolute;
+            top: -0.5em;
+            right: -0.5em;
+            background-color: #e44d26;
+            color: white;
+            font-size: 0.7em;
+            padding: 0.3em 0.5em;
+            border-radius: 50%;
+            display: none; /* Hidden by default */
+        }
+
+        .menu-buy button:hover, .cart-btn:hover, .delivery-btn:hover {
+            background-color: #733D24;
+            color: white;
+            border-color: #733D24;
+        }
+
+        .delivery-btn {
+            background: none;
+            border: 2px solid #733D24;
+            color: #733D24;
+            font-size: 1em;
+            cursor: pointer;
+            padding: 10px 20px; /* Increased padding */
+            border-radius: 25px;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .cart-delivery {
+            display: flex;
+            gap: 10px;
+        }
+
+        .container {
+            max-width: 1000px; /* Increased max-width */
+            margin: 30px auto;
+            background-color: #fff;
+            padding: 40px; /* Increased padding */
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #471E0D;
+            text-align: center;
+            margin-bottom: 30px; /* Increased margin */
+            font-size: 2em; /* Increased font size */
+        }
+
+        .page-details {
+            text-align: center;
+            color: #555;
+            margin-bottom: 30px; /* Increased margin */
+            padding: 0 30px; /* Increased padding */
+            font-size: 1.1em; /* Slightly larger font */
+        }
+
+        .page-details p {
+            line-height: 1.7; /* Increased line height */
+            margin-bottom: 15px; /* Added margin between paragraphs */
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Increased minmax */
+            gap: 30px; /* Increased gap */
+            padding: 30px; /* Increased padding */
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            margin-bottom: 30px; /* Increased margin */
+        }
+
+        .product-card {
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            padding: 20px; /* Increased padding */
+            box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-title {
+            font-weight: bold;
+            margin-bottom: 5px; /* Adjusted margin */
+            color: #471E0D;
+            font-size: 1.2em; /* Slightly larger font */
+        }
+
+        .product-price {
+            color: #B77152;
+            font-size: 1.1em; /* Increased font size */
+            margin-bottom: 10px; /* Adjusted margin */
+        }
+
+        .product-details {
+            font-size: 1em; /* Slightly larger font */
+            color: #555;
+            margin-bottom: 40px; /* Increased margin */
+            line-height: 1.6; /* Increased line height */
+        }
+
+        .add-to-cart-btn {
+            background-color: #471E0D;
+            color: white;
+            border: none;
+            padding: 10px 20px; /* Increased padding */
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1em; /* Slightly larger font */
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 1.2ms ease-in-out, box-shadow 1.2ms ease-in-out;
+            position: absolute;
+            bottom: 15px; /* Increased bottom margin */
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .add-to-cart-btn:hover {
+            background-color: #733D24;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .shape {
+            position: absolute;
+            background-color: rgba(214, 174, 146, 0.3); /* Light brown */
+            border-radius: 50%;
+            animation: pulse 2s infinite alternate;
+        }
+
+        .shape-1 {
+            width: 50px; /* Increased size */
+            height: 50px; /* Increased size */
+            top: 15px; /* Adjusted position */
+            left: 15px; /* Adjusted position */
+        }
+
+        .shape-2 {
+            width: 70px; /* Increased size */
+            height: 70px; /* Increased size */
+            bottom: 15px; /* Adjusted position */
+            right: 15px; /* Adjusted position */
+        }
+
+        .shape-3 {
+            width: 40px; /* Increased size */
+            height: 40px; /* Increased size */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 10%;
+        }
+
+        .shape-croissant {
+            position: absolute;
+            font-size: 2.5em; /* Increased size */
+            opacity: 0.2;
+            top: 15px; /* Adjusted position */
+            right: 15px; /* Adjusted position */
+        }
+
+        .shape-muffin {
+            position: absolute;
+            font-size: 2.5em; /* Increased size */
+            opacity: 0.2;
+            bottom: 15px; /* Adjusted position */
+            left: 15px; /* Adjusted position */
+        }
+
+        .shape-donut {
+            position: absolute;
+            font-size: 2.5em; /* Increased size */
+            opacity: 0.2;
+            top: 50%;
+            left: 15px; /* Adjusted position */
+            transform: translateY(-50%);
+        }
+
+        .shape-cookie {
+            position: absolute;
+            font-size: 2.5em; /* Increased size */
+            opacity: 0.2;
+            bottom: 50%;
+            right: 15px; /* Adjusted position */
+            transform: translateY(50%);
+            border-radius: 50%;
+        }
+
+        .shape-tea {
+            position: absolute;
+            font-size: 2.5em; /* Increased size */
+            opacity: 0.2;
+            bottom: 15px; /* Adjusted position */
+            left: 15px; /* Adjusted position */
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.3; }
+            100% { transform: scale(1.1); opacity: 0.6; }
+        }
+
+        footer {
+            text-align: center;
+            padding: 2em 0; /* Increased padding */
+            font-size: 0.9em; /* Slightly larger font */
+            color: #777;
+            margin-top: 40px; /* Increased margin */
+        }
+
+        .cart-menu {
+            position: fixed;
+            top: 70px;
+            right: 30px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 15px; /* More rounded corners */
+            padding: 20px;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2); /* Pronounced drop shadow */
+            z-index: 10;
+            display: none; /* Initially hidden */
+            min-width: 300px;
+        }
+
+        .cart-menu.active { /* Class to toggle visibility (you'll need JavaScript for this) */
+            display: block;
+        }
+
+        .cart-menu h3 {
+            color: #471E0D;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .close-cart-btn {
+            background: none;
+            border: none;
+            color: #888;
+            font-size: 1.2em;
+            cursor: pointer;
+        }
+
+        .close-cart-btn:hover {
+            color: #333;
+        }
+
+        .cart-items {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item span {
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        .remove-item-btn {
+            background: none;
+            border: none;
+            color: #ff4d4d;
+            font-size: 1em;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .remove-item-btn:hover {
+            color: #cc0000;
+        }
+
+        .cart-total {
+            margin-top: 15px;
+            padding-top: 10px;
+            border-top: 1px solid #ddd;
+            text-align: right;
+            font-weight: bold;
+            color: #471E0D;
+        }
+
+        .cart-total::before {
+            content: "Total: ";
+        }
+
+        .delivery-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 25px; /* Increased padding */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 11;
+            display: none;
+            min-width: 350px; /* Added minimum width */
+        }
+
+        .delivery-modal h3 {
+            color: #471E0D;
+            margin-top: 0;
+            margin-bottom: 20px; /* Increased margin */
+            font-size: 1.3em; /* Slightly larger font */
+        }
+
+        .delivery-modal label {
+            display: block;
+            margin-bottom: 8px; /* Increased margin */
+            color: #555;
+            font-size: 1.1em; /* Slightly larger font */
+        }
+
+        .delivery-modal input[type="text"] {
+            width: 100%;
+            padding: 10px; /* Increased padding */
+            margin-bottom: 15px; /* Increased margin */
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 1em; /* Slightly larger font */
+        }
+
+        .delivery-modal button {
+            background-color: #471E0D;
+            color: white;
+            border: none;
+            padding: 12px 20px; /* Increased padding */
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1em; /* Slightly larger font */
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 1.2ms ease-in-out, box-shadow 1.2ms ease-in-out;
+            margin-right: 10px;
+        }
+
+        .delivery-modal button:hover {
+            background-color: #733D24;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .close-modal-btn {
+            background-color: #777;
+        }
+
+        .close-modal-btn:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="brand-description">
+            <span style="font-size: 2em; margin-right: 5px;">☕</span>
+            <h1>BEans</h1>
+            <span>- Delivery Cafea Iași</span>
+        </div>
+        <div class="menu-buy">
+            <button>Despre noi</button>
+            <button>Serviciile noastre</button>
+            <button>Locațiile disponibile</button>
+            <button>Echipa</button>
+            <button class="cart-btn" onclick="toggleCart()" data-cart-items="0">Coș</button>
+        </div>
+        <div class="cart-delivery">
+            <button class="delivery-btn" onclick="toggleDeliveryModal()">Livrare</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="page-details">
+            <p>Savurează cafeaua artizanală livrată direct la ușa ta în Iași. La Beans, pasiunea noastră pentru cafea se reflectă în fiecare ceașcă. Selectăm cu grijă boabele de cafea de origine, le prăjim cu măiestrie și le preparăm cu atenție pentru a-ți oferi o experiență unică.</p>
+            <p>Descoperă gama noastră variată de băuturi pe bază de espresso, de la clasicul espresso până la specialități delicioase cu lapte. Pentru o experiență completă, îți oferim și o selecție de produse de patiserie proaspete și gustoase, perfecte pentru a acompania cafeaua ta preferată.</p>
+            <p>Comandă acum și bucură-te de aroma cafelei proaspăt preparate, fără a părăsi confortul casei tale sau al biroului. Livrăm rapid în toatăzona Iașiului. Echipa noastră dedicată asigură ca fiecare comandă ajunge la timp și în perfectă stare, pentru ca tu să te poți relaxa și savura momentul.</p>
+            <p>Suntem mândri să folosim doar ingrediente de cea mai bună calitate, de la boabele de cafea atent selecționate până la laptele proaspăt și produsele de patiserie artizanale. Ne angajăm să oferim o experiență superioară clienților noștri din Iași.</p>
+        </div>
+        <h2>Produse Disponibile</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="shape shape-1"></div>
+                <h3 class="product-title">Espresso ☕</h3>
+                <p class="product-price">8 RON</p>
+                <p class="product-details">Cafea neagră intensă.<br>Volum: 30ml.</p>
+                <button class="add-to-cart-btn" data-product-name="Espresso" data-product-price="8">Adaugă în coș</button>
+            </div>
+            <div class="product-card">
+                <div class="shape shape-2"></div>
+                <h3 class="product-title">Cappuccino 🥛☕</h3>
+                <p class="product-price">12 RON</p>
+                <p class="product-details">Espresso cu lapte spumat.<br>Volum: 150ml.</p>
+                <button class="add-to-cart-btn" data-product-name="Cappuccino" data-product-price="12">Adaugă în coș</button>
+            </div>
+            <div class="product-card">
+                <div class="shape shape-3"></div>
+                <h3 class="product-title">Latte Macchiato 🥛☕</h3>
+                <p class="product-price">14 RON</p>
+                <p class="product-details">Lapte, espresso și spumă în straturi.<br>Volum: 200ml.</p>
+                <button class="add-to-cart-btn" data-product-name="Latte Macchiato" data-product-price="14">Adaugă în coș</button>
+            </div>
+            <div class="product-card">
+                <div class="shape shape-1"></div>
+                <h3 class="product-title">Americano ☕💧</h3>
+                <p class="product-price">9 RON</p>
+                <p class="product-details">Espresso lung cu apă fierbinte.<br>Volum: 120ml.</p>
+                <button class="add-to-cart-btn" data-product-name="Americano" data-product-price="9">Adaugă în coș</button>
+            </div>
+            <div class="product-card">
+                <div class="shape shape-2"></div>
+                <h3 class="product-title">Flat White ☕☁️</h3>
+                <p class="product-price">13 RON</p>
+                <p class="product-details">Espresso cu lapte microspumat fin.<br>Volum: 150ml.</p>
+                <button class="add-to-cart-btn" data-product-name="Flat White" data-product-price="13">Adaugă în coș</button>
+            </div>
+            <div class="product-card">
+                <div class="shape shape-3"></div>
+                <h3 class="product-title">Mocha 🍫☕</h3>
+                <p class="product-price">15 RON</p>
+                <p class="product-details">Espresso, ciocolată și lapte spumat.<br>Volum: 180ml.</p>
+                <button class="add-to-cart-btn" data-product-name="Mocha" data-product-price="15">Adaugă în coș</button>
+            </div>
+            <div class="product-card">
+                <div class="shape shape-1"></div>
+                <h3 class="product-title">Espresso Dublu ☕☕</h3>
+                <p class="product-price">15 RON</p>
+                <p class="product-details">Două shot-uri de espresso intens.<br>Volum: 60ml.</p>
+                <button class="add-to-cart-btn" data-product-name="Espresso Dublu" data-product-price="15">Adaugă în coș</button>
+            </div>
+            <div class="product-card">
+                <div class="shape shape-2"></div>
+                <h3 class="product-title">Macchiato ☕💧🥛</h3>
+                <p class="product-price">10 RON</p>
+                <p class="product-details">Espresso cu o pată de lapte spumat.<br>Volum: 80ml.</p>
+                <button class="add-to-cart-btn" data-product-name="Macchiato" data-product-price="10">Adaugă în coș</button>
+            </div>
+            <div class="product-card">
+                <div class="shape shape-3"></div>
+                <h3 class="product-title">Iced Latte 🧊🥛☕</h3>
+                <p class="product-price">14 RON</p>
+                <p class="product-details">Espresso cu lapte rece și gheață.<br>Volum: 250ml.</p>
+                <button class="add-to-cart-btn" data-product-name="Iced Latte" data-product-price="14">Adaugă în coș</button>
+            </div>
+            <div class="product-card">
+                <span class="shape-croissant">🥐</span>
+                <h3 class="product-title">Croissant Simplu 🥐</h3>
+                <p class="product-price">7 RON</p>
+                <p class="product-details">Pateu fraged și auriu.<br>Greutate: 60g (aprox.).</p>
+                <button class="add-to-cart-btn" data-product-name="Croissant Simplu" data-product-price="7">Adaugă în coș</button>
+            </div>
+            <div class="product-card">
+                <span class="shape-muffin">🧁</span>
+                <h3 class="product-title">Muffin cu Afine 🫐🧁</h3>
+                <p class="product-price">9 RON</p>
+                <p class="product-details">
+                    Brioșă moale cu afine proaspete.<br>Greutate: 80g (aprox.).</p>
+                <button class="add-to-cart-btn" data-product-name="Muffin cu Afine" data-product-price="9">Adaugă în coș</button>
+            </div>
+            <div class="product-card">
+                <span class="shape-donut">🍩</span>
+                <h3 class="product-title">Donut Glazurat 🍩</h3>
+                <p class="product-price">6 RON</p>
+                <p class="product-details">Gogoașă dulce cu glazură colorată.<br>Greutate: 70g (aprox.).</p>
+                <button class="add-to-cart-btn" data-product-name="Donut Glazurat" data-product-price="6">Adaugă în coș</button>
+            </div>
+            <div class="product-card">
+                <span class="shape-cookie">🍪</span>
+                <h3 class="product-title">Cookie cu Ciocolată 🍪🍫</h3>
+                <p class="product-price">5 RON</p>
+                <p class="product-details">Biscuiți cu bucăți mari de ciocolată.<br>Greutate: 50g (aprox.).</p>
+                <button class="add-to-cart-btn" data-product-name="Cookie cu Ciocolată" data-product-price="5">Adaugă în coș</button>
+            </div>
+            <div class="product-card">
+                <span class="shape-tea">🍵</span>
+                <h3 class="product-title">Ceai Verde 🍵</h3>
+                <p class="product-price">7 RON</p>
+                <p class="product-details">Ceai verde revigorant.<br>Volum: 250ml.</p>
+                <button class="add-to-cart-btn" data-product-name="Ceai Verde" data-product-price="7">Adaugă în coș</button>
+            </div>
+            <div class="product-card">
+                <span class="shape-tea">🍵</span>
+                <h3 class="product-title">Ceai Negru 🍵</h3>
+                <p class="product-price">6 RON</p>
+                <p class="product-details">Ceai negru clasic.<br>Volum: 250ml.</p>
+                <button class="add-to-cart-btn" data-product-name="Ceai Negru" data-product-price="6">Adaugă în coș</button>
+            </div>
+            <div class="product-card">
+                <span class="shape-tea">🍵</span>
+                <h3 class="product-title">Ceai de Fructe 🍵</h3>
+                <p class="product-price">7 RON</p>
+                <p class="product-details">Infuzie de fructe aromate.<br>Volum: 250ml.</p>
+                <button class="add-to-cart-btn" data-product-name="Ceai de Fructe" data-product-price="7">Adaugă în coș</button>
+            </div>
+            <div class="product-card">
+                <h3 class="product-title">Cold Brew 💧☕</h3>
+                <p class="product-price">16 RON</p>
+                <p class="product-details">Cafea infuzată la rece, aromă fină.<br>Volum: 200ml.</p>
+                <button class="add-to-cart-btn" data-product-name="Cold Brew" data-product-price="16">Adaugă în coș</button>
+            </div>
+            <div class="product-card">
+                <h3 class="product-title">Affogato 🍨☕</h3>
+                <p class="product-price">12 RON</p>
+                <p class="product-details">Gelato vanilie cu shot de espresso fierbinte.</p>
+                <button class="add-to-cart-btn" data-product-name="Affogato" data-product-price="12">Adaugă în coș</button>
+            </div>
+            <div class="product-card">
+                <h3 class="product-title">Espresso Macchiato ☕💧</h3>
+                <p class="product-price">9 RON</p>
+                <p class="product-details">Espresso cu o spumă fină de lapte.<br>Volum: 50ml.</p>
+                <button class="add-to-cart-btn" data-product-name="Espresso Macchiato" data-product-price="9">Adaugă în coș</button>
+            </div>
+            <div class="product-card">
+                <h3 class="product-title">Brownie 🍫</h3>
+                <p class="product-price">8 RON</p>
+                <p class="product-details">Desert bogat cu ciocolată neagră.<br>Greutate: 90g (aprox.).</p>
+                <button class="add-to-cart-btn" data-product-name="Brownie" data-product-price="8">Adaugă în coș</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        © 2025 Beans - Delivery Cafea Iași
+    </footer>
+
+    <div class="cart-menu" id="cartMenu">
+        <h3>
+            Coșul tău
+            <button class="close-cart-btn" onclick="toggleCart()">❌</button>
+        </h3>
+        <div class="cart-items">
+            <p>Coșul este gol.</p>
+        </div>
+        <div class="cart-total">
+            Total: 0 RON
+        </div>
+    </div>
+
+    <div class="delivery-modal" id="deliveryModal">
+        <h3>Detalii Livrare</h3>
+        <label for="address">Adresă:</label>
+        <input type="text" id="address" name="address" placeholder="Strada, număr, oraș">
+        <button>Comandă</button>
+        <button class="close-modal-btn" onclick="toggleDeliveryModal()">Închide</button>
+    </div>
+
+    <script>
+        const cartButton = document.querySelector('.cart-btn');
+        const cartMenu = document.getElementById('cartMenu');
+        const cartItemsContainer = document.querySelector('.cart-items');
+        const cartTotalElement = document.querySelector('.cart-total');
+        const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+        let cartItems = [];
+        let autoCloseTimeout;
+
+        function updateCartDisplay() {
+            let totalItems = cartItems.reduce((total, item) => total + item.quantity, 0);
+            cartButton.setAttribute('data-cart-items', totalItems);
+            cartButton.textContent = `Coș (${totalItems})`;
+            if (totalItems === 0) {
+                cartButton.textContent = 'Coș';
+            }
+        }
+
+        function addToCart(productName, productPrice) {
+            const existingItem = cartItems.find(item => item.name === productName);
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                const emoji = getProductEmoji(productName); // Function to get emoji
+                cartItems.push({ name: productName, price: parseFloat(productPrice), quantity: 1, emoji: emoji });
+            }
+            updateCartDisplay();
+            updateCartMenu();
+            startAutoClose(); // Start auto-close timer when cart is updated
+        }
+
+        function getProductEmoji(productName) {
+            switch (productName) {
+                case 'Espresso': return '☕';
+                case 'Cappuccino': return '🥛☕';
+                case 'Latte Macchiato': return '🥛☕';
+                case 'Americano': return '☕💧';
+                case 'Flat White': return '☕☁️';
+                case 'Mocha': return '🍫☕';
+                case 'Espresso Dublu': return '☕☕';
+                case 'Macchiato': return '☕💧🥛';
+                case 'Iced Latte': return '🧊🥛☕';
+                case 'Croissant Simplu': return '🥐';
+                case 'Muffin cu Afine': return '🫐🧁';
+                case 'Donut Glazurat': return '🍩';
+                case 'Cookie cu Ciocolată': return '🍪🍫';
+                case 'Ceai Verde': return '🍵';
+                case 'Ceai Negru': return '🍵';
+                case 'Ceai de Fructe': return '🍵';
+                case 'Cold Brew': return '💧☕';
+                case 'Affogato': return '🍨☕';
+                case 'Espresso Macchiato': return '☕💧';
+                case 'Brownie': return '🍫';
+                default: return '';
+            }
+        }
+
+        function updateCartMenu() {
+            cartItemsContainer.innerHTML = '';
+            let totalPrice = 0;
+            if (cartItems.length === 0) {
+                cartItemsContainer.innerHTML = '<p>Coșul este gol.</p>';
+            } else {
+                cartItems.forEach(item => {
+                    const itemTotal = item.price * item.quantity;
+                    const cartItemDiv = document.createElement('div');
+                    cartItemDiv.classList.add('cart-item');
+                    cartItemDiv.innerHTML = `
+                        <span>${item.emoji} ${item.name} x ${item.quantity} - <span class="math-inline">\{itemTotal\} RON</span\>
+<button class\="remove\-item\-btn" data\-product\-name\="</span>{item.name}">❌</button>
+                    `;
+                    cartItemsContainer.appendChild(cartItemDiv);
+                    totalPrice += itemTotal;
+                });
+            }
+            cartTotalElement.textContent = `Total: ${totalPrice} RON`;
+        }
+
+        function toggleCart() {
+            cartMenu.classList.toggle('active');
+            clearTimeout(autocloseTimeout); // Clear any existing timeout when toggling
+            if (cartMenu.classList.contains('active')) {
+                startAutoClose();
+            }
+            updateCartMenu();
+        }
+
+        function startAutoClose() {
+            clearTimeout(autoCloseTimeout);
+            autoCloseTimeout = setTimeout(() => {
+                cartMenu.classList.remove('active');
+            }, 5000);
+        }
+
+        // Prevent auto-close when the mouse is over the cart
+        cartMenu.addEventListener('mouseenter', () => clearTimeout(autoCloseTimeout));
+        cartMenu.addEventListener('mouseleave', startAutoClose);
+
+        // Event listener for removing items
+        cartItemsContainer.addEventListener('click', function(event) {
+            if (event.target.classList.contains('remove-item-btn')) {
+                const productNameToRemove = event.target.dataset.productName;
+                cartItems = cartItems.filter(item => item.name !== productNameToRemove);
+                updateCartDisplay();
+                updateCartMenu();
+                startAutoClose(); // Restart auto-close timer after removal
+            }
+        });
+
+        // Event listeners for adding to cart (already present)
+        document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const productName = this.getAttribute('data-product-name');
+                const productPrice = parseFloat(this.getAttribute('data-product-price'));
+                addToCart(productName, productPrice);
+            });
+        });
+
+        // Initial cart display
+        updateCartDisplay();
+    </script>
+</body>
+</html>
